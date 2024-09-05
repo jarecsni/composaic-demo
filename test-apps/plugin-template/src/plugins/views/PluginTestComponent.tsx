@@ -1,8 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-// @ts-expect-error - This import is not yet available
-import { LocalEventBus } from '@composaic/plugins/views/LocalEventBus';
-// @ts-expect-error - This import is not yet available
-import { SignalService } from '@composaic/services/SignalService';
+
+import { LocalEventBus } from 'composaic/lib/plugins/impl/views/LocalEventBus';
+import { SignalService } from 'composaic/lib/services/SignalService';
 
 import './PluginTestComponent.scss';
 
