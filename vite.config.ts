@@ -14,7 +14,7 @@ export default defineConfig({
                 dummy: 'dummy.js',
             },
             // cannot add modules which are not installed
-            shared: ['react'],
+            shared: ['react', 'composaic'],
         }),
     ],
     build: {

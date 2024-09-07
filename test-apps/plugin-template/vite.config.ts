@@ -24,9 +24,8 @@ export default defineConfig({
                 './NotificationPlugin':
                     './src/plugins/notification/NotificationPlugin.ts',
             },
-            shared: ['react'],
+            shared: ['react', 'composaic'],
         }),
-        // @ts-expect-error - vite-plugin-alias problem with types
         alias({
             entries: [
                 {
