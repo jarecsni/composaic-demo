@@ -65,7 +65,7 @@
         "@emotion/styled": "^11.11.5",
         "@mui/icons-material": "^5.16.4",
         "@mui/material": "^5.16.4",
-        "composaic": "^0.4.20",
+        "composaic": "^0.4.24",
         "express": "^4.19.2",
         "mitt": "^3.0.1",
         "react": "^18.3.1",
