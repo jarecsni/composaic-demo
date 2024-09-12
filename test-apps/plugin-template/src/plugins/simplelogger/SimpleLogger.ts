@@ -1,8 +1,7 @@
 import {
     LoggerExtensionPoint,
     LogMessage,
-    // @ts-expect-error - resolution not working
-} from '@composaic/plugins/impl/logger';
+} from 'composaic/lib/plugins/impl/logger';
 
 import { Plugin } from 'composaic';
 
