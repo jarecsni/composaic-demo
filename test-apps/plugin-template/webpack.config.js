@@ -1,3 +1,4 @@
+import webpack from 'webpack';
 import path from 'path';
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -34,6 +35,17 @@ export default (env, { mode }) => {
                     ? '[name]-[contenthash].css'
                     : '[name].css',
             }),
+            new webpack.container.ModuleFederationPlugin({
+                name: 'TestPlugins',
+                filename: 'TestPlugins.js',
+                exposes: {
+                    './SimpleLogger': './src/plugins/simplelogger/SimpleLogger.ts',
+                    './NavbarExtension': './src/plugins/navbar/NavbarExtension.ts',
+                    './ViewsExtension': './src/plugins/views/ViewsExtension.ts',
+                    './NotificationPlugin':
+                        './src/plugins/notification/NotificationPlugin.ts',
+                },
+            })
         ],
 
         module: {
