@@ -16,9 +16,9 @@
         "husky-install": "husky install"
     },
     "dependencies": {
-        "composaic": "^0.4.0",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "composaic": "^0.5.1",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
     },
     "devDependencies": {
         "@babel/plugin-syntax-import-attributes": "^7.24.7",
@@ -27,6 +27,7 @@
         "@types/react-dom": "^18.2.22",
         "@typescript-eslint/eslint-plugin": "^8.5.0",
         "@typescript-eslint/parser": "^8.5.0",
+        "copy-webpack-plugin": "^12.0.2",
         "css-loader": "^7.1.2",
         "esbuild-loader": "^4.2.2",
         "eslint": "^8.10.0",

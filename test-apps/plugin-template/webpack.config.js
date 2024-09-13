@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import path from 'path';
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -23,7 +24,7 @@ export default (env, { mode }) => {
         output: {
             filename: 'bundle.js',
             path: path.resolve(__dirname, 'dist'),
-            publicPath: '/',
+            publicPath: 'auto'
         },
         plugins: [
             new HtmlWebpackPlugin({
@@ -40,13 +41,30 @@ export default (env, { mode }) => {
                 filename: 'TestPlugins.js',
                 exposes: {
                     './SimpleLogger':
-                        './src/plugins/simplelogger/SimpleLogger.ts',
+                        './src/plugins/simplelogger/SimpleLogger',
                     './NavbarExtension':
-                        './src/plugins/navbar/NavbarExtension.ts',
-                    './ViewsExtension': './src/plugins/views/ViewsExtension.ts',
+                        './src/plugins/navbar/NavbarExtension',
+                    './ViewsExtension': './src/plugins/views/ViewsExtension',
                     './NotificationPlugin':
-                        './src/plugins/notification/NotificationPlugin.ts',
+                        './src/plugins/notification/NotificationPlugin',
                 },
+                shared: {
+                    react: {
+                        requiredVersion: '18.3.1',
+                        singleton: true,
+                        eager: true,
+                    },
+                    composaic: {
+                        requiredVersion: '0.5.1',
+                        singleton: true,
+                        eager: true,
+                    }
+                }
+            }),
+            new CopyWebpackPlugin({
+                patterns: [
+                    { from: './manifest.json', to: '../public/manifest.json' },
+                ],
             }),
         ],
 
@@ -140,8 +158,13 @@ export default (env, { mode }) => {
 
         devServer: {
             host: '0.0.0.0',
-            port: 3000,
+            port: 9000,
             historyApiFallback: true,
+            headers: {
+                'Access-Control-Allow-Origin': '*', // Allows access from any origin
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+                'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
+            },
         },
     };
 };

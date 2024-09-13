@@ -38,6 +38,18 @@ export default (env, { mode }) => {
             new webpack.container.ModuleFederationPlugin({
                 name: 'host',
                 filename: 'host.js',
+                shared: {
+                    react: {
+                        requiredVersion: '18.3.1',
+                        singleton: true,
+                        eager: true,
+                    },
+                    composaic: {
+                        requiredVersion: '0.5.1',
+                        singleton: true,
+                        eager: true,
+                    }
+                }
             }),
         ],
 

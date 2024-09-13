@@ -1,4 +1,4 @@
-
+import { importRemote } from "module-federation-import-remote";
 import { RemoteModule } from 'composaic/lib/core/init';
 
 // https://www.npmjs.com/package/module-federation-import-remote
@@ -12,16 +12,5 @@ export const loadRemoteModule = async (
 ): Promise<unknown | undefined> => {
     const { url, name, bundleFile, moduleName } = remoteModule;
 
-    // url + bundleFile = full path to the bundle file
-    // scope = name
-    // module = moduleName
-    const scope = name;
-
-    await __webpack_init_sharing__("default");
-    const container = (window as Window)[scope] as WebPackContainer; // or get the container somewhere else
-    // Initialize the container, it may provide shared modules
-    await container.init(__webpack_share_scopes__.default);
-    const factory = await ((window as Window)[scope] as WebPackContainer).get(moduleName);
-    const Module = factory();
-    return Module;
+    return importRemote({ url, scope: name, module: moduleName, remoteEntryFileName: bundleFile });
 };
