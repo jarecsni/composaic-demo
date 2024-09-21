@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Routes } from 'react-router-dom';
-import { Navbar } from 'composaic/lib/core/menu/Navbar';
-import { init } from 'composaic/lib/core/init';
-import { getRoutes } from 'composaic/lib/core/menu/menu-utils';
+import { Navbar } from 'composaic';
+import { init } from 'composaic';
+import { getRoutes } from 'composaic';
 import { config } from '../config';
 import ErrorBoundary from './ErrorBoundary';
 import { loadRemoteModule } from './RemoteModuleLoader';

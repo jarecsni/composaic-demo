@@ -1,20 +1,21 @@
-import webpack from 'webpack';
-import path from 'path';
+const webpack = require('webpack');
+const path = require('path');
 
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const ModuleFederationPlugin = require('@module-federation/enhanced').ModuleFederationPlugin;
 
-import { fileURLToPath } from 'url';
+const deps = require('./package.json').dependencies;
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const SharedModuleCachePlugin = require('./SharedModuleCachePlugin');
+const { stat } = require('fs');
 
 const Modes = {
     DEVELOPMENT: 'development',
     PRODUCTION: 'production',
 };
 
-export default (env, { mode }) => {
+module.exports = (env, { mode }) => {
     const isProduction = mode === Modes.PRODUCTION;
 
     return {
@@ -25,7 +26,9 @@ export default (env, { mode }) => {
             path: path.resolve(__dirname, 'dist'),
             publicPath: '/',
         },
+        //stats: 'verbose',
         plugins: [
+            new SharedModuleCachePlugin(),
             new HtmlWebpackPlugin({
                 template: path.join(__dirname, 'src', 'index.html'),
                 favicon: path.join(__dirname, 'src', 'assets/react.svg'),
@@ -40,16 +43,15 @@ export default (env, { mode }) => {
                 filename: 'host.js',
                 shared: {
                     react: {
-                        requiredVersion: '18.3.1',
+                        singleton: true,
+                        eager: true,
+                        requiredVersion: deps.react,
+                    },
+                    composaic: {
                         singleton: true,
                         eager: true,
                     },
-                    composaic: {
-                        requiredVersion: '0.5.1',
-                        singleton: true,
-                        eager: true,
-                    }
-                }
+                },
             }),
         ],
 

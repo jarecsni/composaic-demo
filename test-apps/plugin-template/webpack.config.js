@@ -1,26 +1,30 @@
-import webpack from 'webpack';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-import path from 'path';
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { dependencies } = require('webpack');
+//const ModuleFederationPlugin = require('@module-federation/enhanced').ModuleFederationPlugin;
 
-import { fileURLToPath } from 'url';
+const deps = require('./package.json').dependencies;
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const fileURLToPath = require('url').fileURLToPath;
+
+//const __filename = fileURLToPath(import.meta.url);
+//const __dirname = path.dirname(__filename);
 
 const Modes = {
     DEVELOPMENT: 'development',
     PRODUCTION: 'production',
 };
 
-export default (env, { mode }) => {
+module.exports = (env, { mode }) => {
     const isProduction = mode === Modes.PRODUCTION;
 
     return {
         mode,
-        entry: path.join(__dirname, 'src', 'main.tsx'),
+        entry: {}, //path.join(__dirname, 'src', 'main.tsx'),
         output: {
             filename: 'bundle.js',
             path: path.resolve(__dirname, 'dist'),
@@ -50,16 +54,14 @@ export default (env, { mode }) => {
                 },
                 shared: {
                     react: {
-                        requiredVersion: '18.3.1',
                         singleton: true,
-                        eager: true,
+                        requiredVersion: deps.react,
                     },
                     composaic: {
-                        requiredVersion: '0.5.1',
                         singleton: true,
-                        eager: true,
                     }
-                }
+                },
+                //runtimePlugins: [require.resolve('./npm-runtime-global-plugin.js')],
             }),
             new CopyWebpackPlugin({
                 patterns: [
