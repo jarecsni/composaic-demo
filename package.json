@@ -79,7 +79,7 @@
         "@module-federation/enhanced": "^0.6.4",
         "@mui/icons-material": "^5.16.4",
         "@mui/material": "^5.16.4",
-        "composaic": "latest",
+        "composaic": "^0.6.7",
         "express": "^4.19.2",
         "mitt": "^3.0.1",
         "module-federation-import-remote": "^1.0.26",

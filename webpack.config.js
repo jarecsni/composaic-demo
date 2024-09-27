@@ -50,6 +50,7 @@ module.exports = (env, { mode }) => {
                     composaic: {
                         singleton: true,
                         eager: true,
+                        requiredVersion: deps.composaic,
                     },
                 },
             }),

@@ -24,7 +24,7 @@ module.exports = (env, { mode }) => {
 
     return {
         mode,
-        entry: {}, //path.join(__dirname, 'src', 'main.tsx'),
+        entry: path.join(__dirname, 'src', 'main.tsx'),
         output: {
             filename: 'bundle.js',
             path: path.resolve(__dirname, 'dist'),
@@ -56,9 +56,12 @@ module.exports = (env, { mode }) => {
                     react: {
                         singleton: true,
                         requiredVersion: deps.react,
+                        eager: true,
                     },
                     composaic: {
                         singleton: true,
+                        requiredVersion: deps.composaic,
+                        eager: true,
                     }
                 },
                 //runtimePlugins: [require.resolve('./npm-runtime-global-plugin.js')],

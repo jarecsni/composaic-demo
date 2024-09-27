@@ -1,4 +1,5 @@
-import { DevContainer } from 'composaic/lib/dev/DevContainer';
+import { DevContainer } from 'composaic';
+import { config } from './config';
 
 const loadModule = async (moduleName: string, pkg: string) => {
     const module = await import(`./plugins/${pkg}/${moduleName}.ts`);
@@ -6,7 +7,7 @@ const loadModule = async (moduleName: string, pkg: string) => {
 };
 
 function App() {
-    return <DevContainer loadModuleFn={loadModule}></DevContainer>;
+    return <DevContainer loadModuleFn={loadModule} config={config}></DevContainer>;
 }
 
 export default App;
