@@ -15,6 +15,7 @@
         "build": "npm run clean && webpack --progress --mode production",
         "lint": "eslint src --ext .js,.ts,.tsx --ignore-pattern '!.*.js' --no-error-on-unmatched-pattern",
         "lint:fix": "npm lint --fix",
+        "prettier": "npm run format",
         "format": "prettier --config .prettierrc.js --check src/**/*.{js,jsx,ts,tsx}",
         "format:fix": "prettier --config .prettierrc.js --write src/**/*.{js,jsx,ts,tsx}",
         "type": "./node_modules/.bin/tsc --project tsconfig.json --noEmit",
