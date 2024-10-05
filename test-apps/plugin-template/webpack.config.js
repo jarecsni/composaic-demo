@@ -30,6 +30,9 @@ module.exports = (env, { mode }) => {
             path: path.resolve(__dirname, 'dist'),
             publicPath: 'auto'
         },
+        externals: {
+            systemjs: 'System',
+        },
         plugins: [
             new HtmlWebpackPlugin({
                 template: path.join(__dirname, 'src', 'index.html'),
@@ -80,7 +83,7 @@ module.exports = (env, { mode }) => {
                     loader: 'esbuild-loader',
                     options: {
                         loader: 'tsx',
-                        target: 'es2015',
+                        target: 'esnext',
                         sourcemap: true,
                     },
                     exclude: /node_modules/,

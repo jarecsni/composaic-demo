@@ -4,6 +4,7 @@ import { LocalEventBus } from 'composaic';
 import { SignalService } from 'composaic';
 
 import './PluginTestComponent.scss';
+import { testIt } from '../../sysjstest';
 
 // Assuming the Trade type is defined elsewhere, import it
 // import { Trade } from './path-to-trade-type-definition';
@@ -42,6 +43,7 @@ export const PluginTestComponent: React.FC<TradeDetailViewProps> = ({
                 type: 'notification',
                 payload: { message: 'Hello from Signals' },
             });
+            await testIt();
         })();
 
         events.on('selectedTradeChanged', tradeChangeHandler);
