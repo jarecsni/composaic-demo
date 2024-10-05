@@ -20,7 +20,8 @@
         "format:fix": "prettier --config .prettierrc.js --write src/**/*.{js,jsx,ts,tsx}",
         "type": "./node_modules/.bin/tsc --project tsconfig.json --noEmit",
         "lint-staged": "lint-staged",
-        "husky-install": "husky install"
+        "husky-install": "husky install",
+        "test": "jest"
     },
     "keywords": [
         "nodejs",
@@ -42,11 +43,12 @@
         "@babel/preset-typescript": "^7.21.5",
         "@eslint/compat": "^1.0.3",
         "@eslint/js": "^9.4.0",
-        "@types/jest": "^29.5.12",
+        "@types/jest": "^29.5.13",
         "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",
         "@typescript-eslint/eslint-plugin": "^8.5.0",
         "@typescript-eslint/parser": "^8.5.0",
+        "babel-jest": "^29.7.0",
         "babel-plugin-module-resolver": "^5.0.2",
         "concurrently": "^8.2.2",
         "css-loader": "^7.1.2",
@@ -89,11 +91,17 @@
     },
     "jest": {
         "modulePathIgnorePatterns": [
-            "/node_modules/"
+            "/node_modules/",
+            "/lib/",
+            "/dist/"
         ],
         "moduleNameMapper": {
             "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/mocks/fileMock.js",
-            "\\.(css|less|scss)$": "<rootDir>/test/mocks/styleMock.js"
+            "\\.(css|less|scss)$": "<rootDir>/test/mocks/styleMock.js",
+            "^(\\.{1,2}/.*)\\.js$": "$1"
+        },
+        "transform": {
+            "^.+\\.[t|j]sx?$": "babel-jest"
         }
     }
 }
