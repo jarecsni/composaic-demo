@@ -12,7 +12,7 @@ const System = window.System;
 
 export const testIt = async () => {
     const moduleName = '@composaic/sample-plugin';
-    const moduleUrl = `https://unpkg.com/@composaic/sample-plugin@0.1.8/dist/index`;
+    const moduleUrl = `https://unpkg.com/@composaic/sample-plugin@0.1.9/dist/index`;
 
     System.addImportMap({
         imports: {
