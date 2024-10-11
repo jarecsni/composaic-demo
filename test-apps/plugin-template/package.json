@@ -18,7 +18,7 @@
         "@module-federation/enhanced": "^0.6.4",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "composaic": "^0.8.14"
+        "composaic": "^0.9.0"
     },
     "devDependencies": {
         "@babel/plugin-syntax-import-attributes": "^7.24.7",
