@@ -4,6 +4,7 @@
     "version": "0.0.0",
     "scripts": {
         "start": "webpack serve --progress --mode development",
+        "serve:plugin": "http-server dist -p 9000 --cors -c-1",
         "clean": "rm -rf ./dist",
         "build": "npm run clean && webpack --progress --mode production",
         "lint": "eslint src --ext .js,.ts,.tsx --ignore-pattern '!.*.js' --no-error-on-unmatched-pattern",
@@ -16,9 +17,9 @@
     },
     "dependencies": {
         "@module-federation/enhanced": "^0.6.4",
+        "composaic": "^0.9.0",
         "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "composaic": "^0.9.0"
+        "react-dom": "^18.3.1"
     },
     "devDependencies": {
         "@babel/plugin-syntax-import-attributes": "^7.24.7",
@@ -32,6 +33,7 @@
         "esbuild-loader": "^4.2.2",
         "eslint": "^9.12.0",
         "html-webpack-plugin": "^5.6.0",
+        "http-server": "^14.1.1",
         "jest": "^29.7.0",
         "mini-css-extract-plugin": "^2.9.1",
         "sass": "^1.78.0",

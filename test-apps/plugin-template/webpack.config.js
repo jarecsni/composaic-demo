@@ -4,15 +4,7 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { dependencies } = require('webpack');
-//const ModuleFederationPlugin = require('@module-federation/enhanced').ModuleFederationPlugin;
-
 const deps = require('./package.json').dependencies;
-
-// const fileURLToPath = require('url').fileURLToPath;
-
-//const __filename = fileURLToPath(import.meta.url);
-//const __dirname = path.dirname(__filename);
 
 const Modes = {
     DEVELOPMENT: 'development',
@@ -71,7 +63,7 @@ module.exports = (env, { mode }) => {
             }),
             new CopyWebpackPlugin({
                 patterns: [
-                    { from: './manifest.json', to: '../public/manifest.json' },
+                    { from: './manifest.json', to: isProduction ? '../dist/manifest.json' : '../public/manifest.json' },
                 ],
             }),
         ],
