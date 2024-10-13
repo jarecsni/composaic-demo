@@ -1,7 +1,5 @@
-import { importRemote } from "module-federation-import-remote";
 import { RemoteModule } from 'composaic';
-
-// https://www.npmjs.com/package/module-federation-import-remote
+import { loadRemote } from '@module-federation/runtime';
 
 /**
  * Loads a remote module.
@@ -10,7 +8,8 @@ import { RemoteModule } from 'composaic';
 export const loadRemoteModule = async (
     remoteModule: RemoteModule
 ): Promise<object | undefined> => {
-    const { url, name, bundleFile, moduleName } = remoteModule;
+    const { name, moduleName } = remoteModule;
 
-    return importRemote({ url, scope: name, module: moduleName, remoteEntryFileName: bundleFile });
+    // FIXME - adjust return type to match MF typing
+    return loadRemote(`${name}/${moduleName}`) as Promise<object | undefined>;
 };

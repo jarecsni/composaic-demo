@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
-
+const ModuleFederationPlugin = require('@module-federation/enhanced').ModuleFederationPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const deps = require('./package.json').dependencies;
@@ -35,7 +35,7 @@ module.exports = (env, { mode }) => {
                     ? '[name]-[contenthash].css'
                     : '[name].css',
             }),
-            new webpack.container.ModuleFederationPlugin({
+            new ModuleFederationPlugin({
                 name: 'TestPlugins',
                 filename: 'TestPlugins.js',
                 exposes: {
@@ -49,17 +49,18 @@ module.exports = (env, { mode }) => {
                 },
                 shared: {
                     react: {
-                        singleton: true,
                         requiredVersion: deps.react,
-                        eager: true,
+                        import: 'react', // the "react" package will be used a provided and fallback module
+                        shareKey: 'react', // under this name the shared module will be placed in the share scope
+                        shareScope: 'default', // share scope with this name will be used
+                        singleton: true, // only a single version of the shared module is allowed
                     },
-                    composaic: {
-                        singleton: true,
-                        requiredVersion: deps.composaic,
-                        eager: true,
-                    }
+                    'react-dom': {
+                        requiredVersion: deps['react-dom'],
+                        singleton: true, // only a single version of the shared module is allowed
+                    },
+                    composaic: deps.composaic,
                 },
-                //runtimePlugins: [require.resolve('./npm-runtime-global-plugin.js')],
             }),
             new CopyWebpackPlugin({
                 patterns: [

@@ -1,14 +1,10 @@
 const webpack = require('webpack');
 const path = require('path');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const ModuleFederationPlugin = require('@module-federation/enhanced').ModuleFederationPlugin;
-
+const ModuleFederationPlugin = require('@module-federation/enhanced').ModuleFederationPlugin;
 const deps = require('./package.json').dependencies;
-
 const SharedModuleCachePlugin = require('./SharedModuleCachePlugin');
-const { stat } = require('fs');
 
 const Modes = {
     DEVELOPMENT: 'development',
@@ -17,7 +13,6 @@ const Modes = {
 
 module.exports = (env, { mode }) => {
     const isProduction = mode === Modes.PRODUCTION;
-
     return {
         mode,
         entry: path.join(__dirname, 'src', 'main.tsx'),
@@ -38,19 +33,26 @@ module.exports = (env, { mode }) => {
                     ? '[name]-[contenthash].css'
                     : '[name].css',
             }),
-            new webpack.container.ModuleFederationPlugin({
+            new ModuleFederationPlugin({
                 name: 'host',
-                filename: 'host.js',
                 shared: {
                     react: {
-                        singleton: true,
-                        eager: true,
+                        import: 'react', // the "react" package will be used a provided and fallback module
+                        shareKey: 'react', // under this name the shared module will be placed in the share scope
+                        shareScope: 'default', // share scope with this name will be used
+                        singleton: true, // only a single version of the shared module is allowed
                         requiredVersion: deps.react,
+                        eager: true,
+                    },
+                    'react-dom': {
+                        singleton: true, // only a single version of the shared module is allowed
+                        requiredVersion: deps['react-dom'],
+                        eager: true,
                     },
                     composaic: {
                         singleton: true,
+                        requiredVersion: deps['composaic'],
                         eager: true,
-                        requiredVersion: deps.composaic,
                     },
                 },
             }),
