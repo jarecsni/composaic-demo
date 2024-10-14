@@ -19,6 +19,7 @@ module.exports = (env, { mode }) => {
         entry: path.join(__dirname, 'src', 'main.tsx'),
         output: {
             filename: 'bundle.js',
+            chunkFilename: '[name]-[contenthash].js',
             path: path.resolve(__dirname, 'dist'),
             publicPath: 'auto'
         },
@@ -61,6 +62,7 @@ module.exports = (env, { mode }) => {
                     },
                     composaic: deps.composaic,
                 },
+                dts: false
             }),
             new CopyWebpackPlugin({
                 patterns: [
