@@ -55,12 +55,18 @@ module.exports = (env, { mode }) => {
                         shareKey: 'react', // under this name the shared module will be placed in the share scope
                         shareScope: 'default', // share scope with this name will be used
                         singleton: true, // only a single version of the shared module is allowed
+                        eager: true
                     },
                     'react-dom': {
                         requiredVersion: deps['react-dom'],
                         singleton: true, // only a single version of the shared module is allowed
+                        eager: true,
                     },
-                    composaic: deps.composaic,
+                    composaic: {
+                        singleton: true,
+                        requiredVersion: deps['composaic'],
+                        eager: true,
+                    },
                 },
                 dts: false
             }),
