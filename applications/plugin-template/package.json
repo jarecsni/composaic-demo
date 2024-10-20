@@ -4,9 +4,9 @@
     "version": "0.0.0",
     "scripts": {
         "start": "webpack serve --progress --mode development",
-        "serve:plugin": "http-server dist -p 9000 --cors -c-1",
+        "serve:plugin": "http-server dist -p 4000 --cors -c-1",
         "clean": "rm -rf ./dist",
-        "build": "npm run clean && webpack --progress --mode production",
+        "build": "webpack --progress --mode production",
         "lint": "eslint src --ext .js,.ts,.tsx --ignore-pattern '!.*.js' --no-error-on-unmatched-pattern",
         "lint:fix": "npm lint --fix",
         "format": "prettier --config .prettierrc.js --check src/**/*.{js,jsx,ts,tsx}",
@@ -16,8 +16,8 @@
         "husky-install": "husky install"
     },
     "dependencies": {
-        "@module-federation/enhanced": "^0.6.4",
-        "composaic": "^0.9.0",
+        "@module-federation/enhanced": "^0.6.10",
+        "composaic": "^0.10.4",
         "react": "^18.3.1",
         "react-dom": "^18.3.1"
     },

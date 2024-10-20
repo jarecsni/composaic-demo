@@ -1,8 +1,20 @@
 export const config = {
     dev: {
-        remotes: ['http://localhost:9000'],
+        remotes: [
+            {
+                name: 'TestPlugins',
+                host: 'http://localhost:9000',
+                file: 'TestPlugins.js'
+            },
+        ],
     },
     prd: {
-        remotes: ['http://localhost:9000'],
-    },
+        remotes: [
+            {
+                name: 'TestPlugins',
+                host: 'http://localhost:4000',
+                file: 'TestPlugins.js'
+            },
+        ],
+    }
 };
