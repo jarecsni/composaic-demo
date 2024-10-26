@@ -13,3 +13,4 @@ export const loadRemoteModule = async (
     // FIXME - adjust return type to match MF typing
     return loadRemote(`${name}/${moduleName}`) as Promise<object | undefined>;
 };
+
