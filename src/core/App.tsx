@@ -15,7 +15,7 @@ const transformedRemotes = remotesConfig.map(({ name, host, file }) => ({
     name,
     entry: `${host}/${file}`,
 }));
-initModuleFederation({ name: 'host', remotes: transformedRemotes });
+//initModuleFederation({ name: 'host', remotes: transformedRemotes });
 
 // Initalise Plugin Framework
 await init({

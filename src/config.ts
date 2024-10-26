@@ -12,7 +12,7 @@ export const config = {
         remotes: [
             {
                 name: 'TestPlugins',
-                host: 'http://localhost:4000',
+                host: 'http://localhost:4000/testplugins',
                 file: 'TestPlugins.js'
             },
         ],
