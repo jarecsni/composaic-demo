@@ -1,7 +1,8 @@
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
-const ModuleFederationPlugin = require('@module-federation/enhanced').ModuleFederationPlugin;
+const ModuleFederationPlugin =
+    require('@module-federation/enhanced').ModuleFederationPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const deps = require('./package.json').dependencies;
@@ -13,15 +14,17 @@ const Modes = {
 
 module.exports = (env, { mode }) => {
     const isProduction = mode === Modes.PRODUCTION;
-
     return {
         mode,
         entry: path.join(__dirname, 'src', 'main.tsx'),
         output: {
             filename: 'bundle.js',
             chunkFilename: '[name]-[contenthash].js',
-            path: path.resolve(__dirname, 'dist'),
-            publicPath: 'auto'
+            path: path.resolve(
+                __dirname,
+                isProduction ? 'dist/testplugins' : 'dist'
+            ),
+            publicPath: 'auto',
         },
         externals: {
             systemjs: 'System',
@@ -40,10 +43,8 @@ module.exports = (env, { mode }) => {
                 name: 'TestPlugins',
                 filename: 'TestPlugins.js',
                 exposes: {
-                    './SimpleLogger':
-                        './src/plugins/simplelogger/SimpleLogger',
-                    './NavbarExtension':
-                        './src/plugins/navbar/NavbarExtension',
+                    './SimpleLogger': './src/plugins/simplelogger/SimpleLogger',
+                    './NavbarExtension': './src/plugins/navbar/NavbarExtension',
                     './ViewsExtension': './src/plugins/views/ViewsExtension',
                     './NotificationPlugin':
                         './src/plugins/notification/NotificationPlugin',
@@ -55,7 +56,7 @@ module.exports = (env, { mode }) => {
                         shareKey: 'react', // under this name the shared module will be placed in the share scope
                         shareScope: 'default', // share scope with this name will be used
                         singleton: true, // only a single version of the shared module is allowed
-                        eager: true
+                        eager: true,
                     },
                     'react-dom': {
                         requiredVersion: deps['react-dom'],
@@ -68,11 +69,16 @@ module.exports = (env, { mode }) => {
                         eager: true,
                     },
                 },
-                dts: false
+                dts: false,
             }),
             new CopyWebpackPlugin({
                 patterns: [
-                    { from: './manifest.json', to: isProduction ? '../dist/manifest.json' : '../public/manifest.json' },
+                    {
+                        from: './manifest.json',
+                        to: isProduction
+                            ? '../testplugins/manifest.json'
+                            : '../public/manifest.json',
+                    },
                 ],
             }),
         ],
@@ -172,8 +178,10 @@ module.exports = (env, { mode }) => {
             historyApiFallback: true,
             headers: {
                 'Access-Control-Allow-Origin': '*', // Allows access from any origin
-                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-                'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
+                'Access-Control-Allow-Methods':
+                    'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+                'Access-Control-Allow-Headers':
+                    'X-Requested-With, content-type, Authorization',
             },
         },
     };
