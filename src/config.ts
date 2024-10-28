@@ -6,6 +6,11 @@ export const config = {
                 host: 'http://localhost:9000',
                 file: 'TestPlugins.js'
             },
+            {
+                name: 'TestPluginOne',
+                host: 'http://localhost:9001',
+                file: 'TestPluginOne.js'
+            },
         ],
     },
     prd: {
