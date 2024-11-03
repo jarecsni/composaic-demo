@@ -20,6 +20,11 @@ export const config = {
                 host: 'http://localhost:4000/testplugins',
                 file: 'TestPlugins.js'
             },
+            {
+                name: 'TestPluginOne',
+                host: 'http://localhost:4001/testplugin-one',
+                file: 'TestPluginOne.js'
+            },
         ],
     }
 };
