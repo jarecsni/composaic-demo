@@ -22,7 +22,7 @@ export const config = {
             },
             {
                 name: 'TestPluginOne',
-                host: 'http://localhost:4001/testplugin-one',
+                host: 'http://localhost:4000/testplugin-one',
                 file: 'TestPluginOne.js'
             },
         ],

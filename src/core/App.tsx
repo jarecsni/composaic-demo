@@ -1,6 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Routes } from 'react-router-dom';
-import { init, getRoutes, ComposaicEnv, ConfigurationService, Navbar } from 'composaic';
+import {
+    init,
+    getRoutes,
+    ComposaicEnv,
+    ConfigurationService,
+    Navbar,
+} from 'composaic';
 import { init as initModuleFederation } from '@module-federation/runtime';
 import { config } from '../config';
 import ErrorBoundary from './ErrorBoundary';

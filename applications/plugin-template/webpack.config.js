@@ -74,10 +74,8 @@ module.exports = (env, { mode }) => {
             new CopyWebpackPlugin({
                 patterns: [
                     {
-                        from: './manifest.json',
-                        to: isProduction
-                            ? '../testplugins/manifest.json'
-                            : '../public/manifest.json',
+                        from: './public/manifest.json',
+                        to: '../testplugin-one/manifest.json',
                     },
                 ],
             }),
