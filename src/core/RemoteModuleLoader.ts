@@ -1,4 +1,4 @@
-import { importRemote } from "module-federation-import-remote";
+import { importRemote } from 'module-federation-import-remote';
 import { RemoteModule } from 'composaic';
 
 // https://www.npmjs.com/package/module-federation-import-remote
@@ -12,5 +12,15 @@ export const loadRemoteModule = async (
 ): Promise<object | undefined> => {
     const { url, name, bundleFile, moduleName } = remoteModule;
 
-    return importRemote({ url, scope: name, module: moduleName, remoteEntryFileName: bundleFile });
+    try {
+        return await importRemote({
+            url,
+            scope: name,
+            module: moduleName,
+            remoteEntryFileName: bundleFile,
+        });
+    } catch (error) {
+        console.error(`Failed to load remote module ${name}: ${error.message}`);
+        return undefined; // Handle the error appropriately
+    }
 };
