@@ -5,8 +5,6 @@ import { config } from '../config';
 import ErrorBoundary from './ErrorBoundary';
 import { loadRemoteModule } from './RemoteModuleLoader';
 
-console.log('config: ' + JSON.stringify(config));
-
 // Initalise Plugin Framework
 // we do not await the init since we have receive notification further plugins are added, we can start the app init straight away
 await init({
