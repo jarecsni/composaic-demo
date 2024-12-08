@@ -24,7 +24,7 @@ export class SimpleLoggerExtension implements LoggerExtensionPoint {
         );
         this.log({
             level: 'info',
-            message: `Logger initialised with ${log}`,
+            message: `Hello from SimpleLoggerExtension`,
             timestamp: new Date(),
             subSystemName: this.getSubSystemName(),
         });
