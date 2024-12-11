@@ -7,7 +7,7 @@ import { loadRemoteModule } from './RemoteModuleLoader';
 
 // Initalise Plugin Framework
 // we do not await the init since we have receive notification further plugins are added, we can start the app init straight away
-await init({
+init({
     config,
     loadRemoteModuleFn: loadRemoteModule,
 });
